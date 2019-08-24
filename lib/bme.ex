@@ -37,4 +37,33 @@ defmodule Bme do
   def standard_deviation nums do
     nums |> variance |> :math.sqrt 
   end
+  def dilute start, %{:times => t, :by => amount} do
+    start * :math.pow(amount,t)
+  end
+  def dilute start, %{:by => amount} do
+    dilute start, %{:by => amount, :times => 1}
+  end
+  
+  def p_other p do
+    14 - p
+  end
+
+  @gas_const 8.314
+  
+  def delta_g_std reactants, products, temperature do
+    p = products |> Enum.reduce(1, &(&1 * &2))
+    r = reactants |> Enum.reduce(1, &(&1 * &2)) 
+    -1 * @gas_const * temperature * :math.log(p/r)
+  end
+
+  def henderson_hasselbach pKa, pH do
+    :math.pow(10,pH - pKa)
+  end
+  def henderson_hasselbach pKa, conj_base, conj_acid do
+    pKa + :math.log10(conj_base/conj_acid)
+  end
+
+  def conc_HA volume, pKa, pH do
+    volume / (1 + henderson_hasselbach(pKa,pH))
+  end
 end
