@@ -54,4 +54,10 @@ defmodule BmeTest do
     conc = Bme.conc_HA(0.1,6.86,7)
     assert Kernel.round(conc*100) == 4
   end
+
+  test "find the isoelectric point (isoelectric pH) for an amino acid" do
+    pHs = [2.34, 9.60]
+    assert Bme.isoelectric_point(pHs) == 5.97
+  end
+
 end

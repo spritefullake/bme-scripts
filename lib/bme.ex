@@ -66,4 +66,8 @@ defmodule Bme do
   def conc_HA volume, pKa, pH do
     volume / (1 + henderson_hasselbach(pKa,pH))
   end
+
+  def isoelectric_point pHs do
+    average(pHs)
+  end
 end
