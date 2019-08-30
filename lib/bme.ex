@@ -70,4 +70,23 @@ defmodule Bme do
   def isoelectric_point pHs do
     average(pHs)
   end
+  
+  @doc """
+  Determines the number of 
+  amino acid residues in a simple protein.
+
+  The average weight of a residue is 110 g/mol.
+  
+  """
+  @spec amino_acid_count(non_neg_integer) :: non_neg_integer
+  def amino_acid_count protein_weight do
+    protein_weight / 110
+  end 
+
+  def lambert_beer_absorbance molar_extinction_coefficient, concentration, path_length do
+    molar_extinction_coefficient * concentration * path_length
+  end
+  def lambert_beer_concentration molar_extinction_coefficient, absorbance, path_length do
+    absorbance / molar_extinction_coefficient / path_length
+  end
 end
