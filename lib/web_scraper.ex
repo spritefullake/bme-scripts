@@ -34,17 +34,16 @@ defmodule WebScraper do
   """
   defp format_table_data(data) do
     # Prevents internal separation of Chemical Formulas comma-wise 
-    raw_aa = data
-    |> Enum.map(fn tr ->
-      tr
-      |> Floki.find("td")
-      |> Enum.map(&Floki.text/1)
-      |> Floki.text(sep: ",")
-    end)
-    |> Enum.take(@common_aa_count)
-    |> Enum.join("\n")
-
-
+    raw_aa =
+      data
+      |> Enum.map(fn tr ->
+        tr
+        |> Floki.find("td")
+        |> Enum.map(&Floki.text/1)
+        |> Floki.text(sep: ",")
+      end)
+      |> Enum.take(@common_aa_count)
+      |> Enum.join("\n")
   end
 
   defp format_chemical_headings(headings) do
