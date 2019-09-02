@@ -25,7 +25,8 @@ defmodule Bme.MixProject do
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
       {:floki, "~> 0.22.0"},
       # {:html5ever, "~> 0.7.0"},
-      {:httpoison, "~> 1.5"}
+      {:httpoison, "~> 1.5"},
+      {:nimble_csv, "~> 0.3"}
     ]
   end
 end

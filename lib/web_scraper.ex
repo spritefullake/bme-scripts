@@ -5,6 +5,8 @@ defmodule WebScraper do
   @amino_acids_url "https://www.sigmaaldrich.com/life-science/metabolomics/learning-center/amino-acid-reference-chart.html"
   @common_aa_count 22
   @aa_file_path "lib/amino_acid_data.csv"
+  def aa_file_path, do: @aa_file_path
+
   def store_amino_acids do
     html = scrape_amino_acids()
 
@@ -32,7 +34,7 @@ defmodule WebScraper do
   """
   defp format_table_data(data) do
     # Prevents internal separation of Chemical Formulas comma-wise 
-    data
+    raw_aa = data
     |> Enum.map(fn tr ->
       tr
       |> Floki.find("td")
@@ -40,14 +42,15 @@ defmodule WebScraper do
       |> Floki.text(sep: ",")
     end)
     |> Enum.take(@common_aa_count)
-    |> Enum.map(&String.trim/1)
     |> Enum.join("\n")
+
+
   end
 
   defp format_chemical_headings(headings) do
     headings
     |> Floki.find("td")
-    |> Enum.map(fn td -> Regex.replace(~r/[^\w]/, td |> Floki.text(), "") end)
+    |> Enum.map(fn td -> Regex.replace(~r/[^\w]/, Floki.text(td), "") end)
     |> Enum.join(",")
   end
 
