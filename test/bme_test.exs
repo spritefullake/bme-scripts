@@ -62,4 +62,18 @@ defmodule BmeTest do
     pHs = [2.34, 9.60]
     assert Bme.isoelectric_point(pHs) == 5.97
   end
+
+  test "appropriately split the given valid amino acid sequence" do
+    seq_hyphen = "Met-Thr-Val-Ile"
+    seq_camel_case = "MetThrValIle"
+    result = ["Met", "Thr", "Val", "Ile"]
+
+    assert AminoAcid.split(seq_hyphen) == result
+    assert AminoAcid.split(seq_camel_case) == result
+  end
+
+  test "correctly count the amino acids" do
+    seq = ["Met", "Met", "Val", "Ile"]
+    assert %{"Met" => 2, "Val" => 1, "Ile" => 1} = AminoAcid.counts(seq)
+  end
 end
