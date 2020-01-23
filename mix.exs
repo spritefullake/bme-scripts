@@ -26,7 +26,8 @@ defmodule Bme.MixProject do
       {:floki, "~> 0.22.0"},
       # {:html5ever, "~> 0.7.0"},
       {:httpoison, "~> 1.5"},
-      {:nimble_csv, "~> 0.3"}
+      {:nimble_csv, "~> 0.3"},
+      {:erlport, "~> 0.10.1"}
     ]
   end
 end

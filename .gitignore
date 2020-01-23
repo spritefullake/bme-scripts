@@ -23,3 +23,5 @@ erl_crash.dump
 bme-*.tar
 
 /.elixir_ls/
+
+/__pycache__/
